@@ -1,0 +1,50 @@
+h3,
+p {
+  margin: 0;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+body {
+  margin: 0;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.overflowScroll {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.overflowScrolly {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.el-link::after {
+  display: none;
+}
+.el-link.el-link--default {
+  color: #409eff !important;
+}
+.ellip {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
