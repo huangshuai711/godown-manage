@@ -43,6 +43,9 @@ export default {
     background: #fff;
     box-shadow: 0 3px 12px rgb(98 107 181 / 25%);
     height: 72px;
+    background-color: #080a09;
+    background-image: linear-gradient(45deg, #2c87d3, #ffba00);
+    color: #fff;
   }
   .menu-content {
     flex: 1;
@@ -52,6 +55,11 @@ export default {
       height: 100%;
       width: 350px;
       overflow: auto;
+
+      background-color: #080a09;
+      background-image: linear-gradient(45deg, #ffba00, #2c87d3);
+      color: #fff;
+      color: #fff;
       .el-menu-vertical-demo {
         height: 100%;
       }

@@ -2,7 +2,7 @@
   <el-menu
     :default-active="editableTabsValue"
     class="el-menu-vertical-demo"
-    background-color="#ff6000"
+    background-color="hsla(0,0%,100%,0)"
     text-color="hsla(0,0%,100%,.65)"
     :router="true"
     :default-openeds="defaultOpeneds"
@@ -59,12 +59,12 @@ export default {
   padding-left: 50px !important;
 }
 ::v-deep .el-menu-item.is-active {
-  background: linear-gradient(to right, #ff7000 0%, #fff 100%) !important;
+  background: #e1a70e !important;
 }
 ::v-deep .el-menu-item:hover {
-  background: linear-gradient(to right, #ff7000 0%, #fff 100%) !important;
+  background: #e1a70e !important;
 }
 ::v-deep .el-submenu .el-submenu__title:hover {
-  background-color: #ff7000 !important;
+  background-color: #e1a70e !important;
 }
 </style>
