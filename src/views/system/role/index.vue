@@ -16,6 +16,7 @@
     <Pagination ref="page" :total="total" class="flex-bot"></Pagination>
     <Details ref="detail" v-model="detailsShow"></Details>
     <Edit ref="edit" v-model="editShow" @refresh="getData"></Edit>
+    <Warrant ref="warrant" v-model="warrantShow" @refresh="getData"></Warrant>
   </div>
 </template>
 
@@ -27,9 +28,10 @@ import { getRoleList, exportRole, changeRoleState } from '@/api/system'
 import { downloadFile } from '@/utils'
 import Details from './components/details.vue'
 import Edit from './components/edit.vue'
+import Warrant from './components/warrant.vue'
 export default {
   name: 'commodity-info',
-  components: { SearchFrom, Table, Pagination, Details, Edit },
+  components: { SearchFrom, Table, Pagination, Details, Edit, Warrant },
   data() {
     return {
       formData: [
@@ -90,7 +92,8 @@ export default {
       queryParam: {},
       loading: false,
       detailsShow: false,
-      editShow: false
+      editShow: false,
+      warrantShow: false
     }
   },
   mounted() {
@@ -131,7 +134,13 @@ export default {
         this.changeState(data.row)
       } else if (data.key == 'delete') {
         this.delete(data.row)
+      } else if (data.key == 'power') {
+        this.power(data.row)
       }
+    },
+    power(row) {
+      this.$refs.warrant.data = row
+      this.warrantShow = true
     },
     goDetails(row) {
       this.$refs.detail.data = row

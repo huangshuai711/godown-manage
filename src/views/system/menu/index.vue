@@ -15,9 +15,8 @@
 </template>
 
 <script>
-import TreeTable from '@/components/treeTable/index.vue'
+import TreeTable from '@/components/treeTable'
 import { getSllMenuTree, removeMenu } from '@/api/system'
-import { deleteCommodityType } from '@/api/commodity'
 import EidtAdd from './components/eidtAdd.vue'
 export default {
   name: 'commodity-sort',

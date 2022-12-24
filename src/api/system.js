@@ -164,3 +164,20 @@ export function userRoles(id) {
     method: 'POST'
   })
 }
+
+// 菜单授权
+export function roleMenu(parameter) {
+  return request({
+    url: `/api/roles/roleMenu`,
+    method: 'POST',
+    data: parameter
+  })
+}
+
+// 角色拥有菜单
+export function getRoleMenu(id) {
+  return request({
+    url: `/api/menu/menuTree/${id}`,
+    method: 'GET'
+  })
+}
