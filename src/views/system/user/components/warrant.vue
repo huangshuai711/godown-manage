@@ -31,7 +31,7 @@
 <script>
 import Table from '@/components/table'
 import Pagination from '@/components/pagination'
-import { getRoleList, userRole } from '@/api/system'
+import { getRoleList, userRole, userRoles } from '@/api/system'
 export default {
   components: { Table, Pagination },
   model: {
@@ -54,7 +54,8 @@ export default {
       loading: false,
       total: 0,
       searchText: '',
-      queryParam: {}
+      queryParam: {},
+      userRoleArr: []
     }
   },
   watch: {
@@ -84,6 +85,14 @@ export default {
         this.tableData = res.data.records
         this.total = res.data.total
         this.loading = false
+
+        this.getUserRoles()
+      } catch (error) {}
+    },
+    async getUserRoles() {
+      try {
+        this.userRoleArr = await userRoles(this.data.id).then(res => res.data)
+        this.$refs.table.toggleSelection(this.userRoleArr)
       } catch (error) {}
     },
     confirm() {
@@ -113,7 +122,7 @@ export default {
   position: absolute !important;
 }
 .flex-bot {
-  margin: 30px 0;
+  margin-top: 30px;
   display: flex;
   justify-content: right;
 }

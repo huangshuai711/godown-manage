@@ -3,6 +3,7 @@
     :data="tableData"
     :border="true"
     v-loading="loading"
+    :row-key="rowKey"
     ref="multipleTable"
     style="width: 100%"
     :cell-style="{ 'text-align': 'center' }"
@@ -76,6 +77,10 @@ export default {
     showIndex: {
       type: Boolean,
       default: true
+    },
+    rowKey: {
+      type: String,
+      default: 'id'
     }
   },
   data() {
@@ -91,7 +96,7 @@ export default {
     },
     handleSelectionChange(val) {
       this.multipleSelection = val
-      this.multipleSelectionId = val.map(item => item.id)
+      this.multipleSelectionId = val.map(item => item?.id)
     },
     clearSelection(rows) {
       this.$refs.multipleTable.clearSelection()
@@ -101,6 +106,16 @@ export default {
     },
     getIds() {
       return this.multipleSelectionId
+    },
+    toggleSelection(rows) {
+      if (rows) {
+        rows.forEach(row => {
+          const newRow = this.tableData?.find(item => item.id == row.roleId)
+          newRow && this.$refs.multipleTable.toggleRowSelection(newRow)
+        })
+      } else {
+        this.$refs.multipleTable.clearSelection()
+      }
     }
   }
 }

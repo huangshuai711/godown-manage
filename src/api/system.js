@@ -156,3 +156,11 @@ export function userRole(parameter) {
     data: parameter
   })
 }
+
+// 用户拥有角色
+export function userRoles(id) {
+  return request({
+    url: `/api/roles/listUserRole/${id}`,
+    method: 'POST'
+  })
+}
