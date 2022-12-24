@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="进货单号详情"
+    title="销售单号详情"
     :visible.sync="childShow"
     :close-on-click-modal="false"
     width="600px"
@@ -34,16 +34,16 @@ export default {
     return {
       childShow: this.fatherShow,
       formArr: [
-        { type: 'text', label: '进货单据号', prop: 'documentNum' },
-        { type: 'text', label: '进货人姓名', prop: 'createUserName' },
-        { type: 'text', label: '进货总数量', prop: 'totalCount' },
-        { type: 'text', label: '进货时间', prop: 'createTime' }
+        { type: 'text', label: '销售单据号', prop: 'documentNum' },
+        { type: 'text', label: '销售人姓名', prop: 'createUserName' },
+        { type: 'text', label: '销售总数量', prop: 'totalCount' },
+        { type: 'text', label: '销售时间', prop: 'createTime' }
       ],
       tableRow: [
         { key: 'productName', label: '商品名称' },
         { key: 'supplierName', label: '供应商名称' },
         { key: 'clientName', label: '客户名称' },
-        { key: 'supplierName', label: '进货数量' }
+        { key: 'supplierName', label: '销售数量' }
       ],
       data: null
     }

@@ -38,10 +38,6 @@
         </el-select>
       </template>
     </Table>
-    <div class="floot-btn">
-      <el-button type="primary" size="mini" @click="enter">确 认</el-button>
-      <el-button type="primary" size="mini" @click="cancel">取 消</el-button>
-    </div>
     <Pagination ref="page" :total="total" class="flex-bot"></Pagination>
   </div>
 </template>
@@ -50,9 +46,8 @@
 import SearchFrom from '@/components/searchFrom'
 import Table from '@/components/table'
 import Pagination from '@/components/pagination'
-import { getCommodityList, exportCommodity } from '@/api/baseData'
-import { getClientList } from '@/api/baseData'
-import { saleIssue } from '@/api/purchase'
+import { exportCommodity } from '@/api/baseData'
+import { saleIssue, getSaleInWareList } from '@/api/purchase'
 import { downloadFile } from '@/utils'
 export default {
   name: 'commodity-info',
@@ -76,14 +71,14 @@ export default {
       btnArr: [
         { key: 'query', name: '查询' },
         { key: 'reset', name: '重置' },
-        { key: 'return', name: '销售出库' }
+        { key: 'return', name: '退货' }
       ],
       tableRow: [
         { key: 'productName', label: '商品名称' },
         { key: 'supplierName', label: '供应商' },
-        { key: 'finalInventory', label: '库存数量' },
-        { key: 'target', label: '目标客户', type: 'slot' },
-        { key: 'num', label: '销售数量', type: 'slot' }
+        { key: 'clientName', label: '客户名称' },
+        { key: 'stockNum', label: '购买数量' },
+        { key: 'num', label: '退货数量', type: 'slot' }
       ],
       tableData: [],
       total: 0,
@@ -98,19 +93,10 @@ export default {
   },
   mounted() {
     this.getData()
-    this.remoteMethod()
   },
   methods: {
-    async remoteMethod(query) {
-      this.loadings = true
-      this.clientList = await getClientList(
-        { clientName: query || '' },
-        { pageNum: 1, pageSize: 100 }
-      ).then(res => res.data.records)
-      this.loadings = false
-    },
     enter() {
-      this.$confirm(`确认退货？`, '提示', {
+      this.$confirm(`确认出库？`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -144,8 +130,8 @@ export default {
         this.query()
       } else if (key == 'reset') {
         this.reset()
-      } else if (key == 'export') {
-        this.export()
+      } else if (key == 'return') {
+        this.enter()
       }
     },
     query() {
@@ -173,19 +159,18 @@ export default {
       this.detailsShow = true
     },
     async getData() {
-      try {
-        this.loading = true
-        const paging = this.$refs.page.getPage()
-        const res = await getCommodityList(this.queryParam, paging)
-        this.tableData = res.data.records
-        this.purchases = []
-        this.tableData.forEach(item => {
-          this.purchases.push({ productId: item.id, num: 0, clientId: '' })
-        })
-        console.log('this.purchases', this.purchases)
-        this.total = res.data.total
-        this.loading = false
-      } catch (error) {}
+      // try {
+      this.loading = true
+      const paging = this.$refs.page.getPage()
+      const res = await getSaleInWareList(this.queryParam, paging)
+      this.tableData = res.data.records
+      this.purchases = []
+      this.tableData.forEach(item => {
+        this.purchases.push({ productId: item.id, num: 0 })
+      })
+      this.total = res.data.total
+      this.loading = false
+      // } catch (error) {}
     }
   }
 }

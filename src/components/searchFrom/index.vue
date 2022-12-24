@@ -54,7 +54,7 @@ export default {
     },
     labelWidth: {
       type: String,
-      default: '80px'
+      default: '100px'
     }
   },
   data() {

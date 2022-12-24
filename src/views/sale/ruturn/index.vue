@@ -38,10 +38,6 @@
         </el-select>
       </template>
     </Table>
-    <div class="floot-btn">
-      <el-button type="primary" size="mini" @click="enter">确 认</el-button>
-      <el-button type="primary" size="mini" @click="cancel">取 消</el-button>
-    </div>
     <Pagination ref="page" :total="total" class="flex-bot"></Pagination>
   </div>
 </template>
@@ -144,8 +140,8 @@ export default {
         this.query()
       } else if (key == 'reset') {
         this.reset()
-      } else if (key == 'export') {
-        this.export()
+      } else if (key == 'return') {
+        this.enter()
       }
     },
     query() {

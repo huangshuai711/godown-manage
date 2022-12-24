@@ -44,3 +44,12 @@ export function saleIssue(parameter) {
     data: parameter
   })
 }
+
+// 获取客户退货列表
+export function getSaleInWareList(parameter, paging) {
+  return request({
+    url: `/api/purchases/pageSaleInWarehouse/${paging.pageNum}/${paging.pageSize}`,
+    method: 'post',
+    data: parameter
+  })
+}
