@@ -110,7 +110,7 @@ export default {
       this.loadings = false
     },
     enter() {
-      this.$confirm(`确认退货？`, '提示', {
+      this.$confirm(`确认出库？`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
