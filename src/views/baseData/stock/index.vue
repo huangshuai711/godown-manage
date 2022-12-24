@@ -49,7 +49,7 @@ export default {
         {
           type: 'input',
           name: '商品名称',
-          key: 'supplierName',
+          key: 'productName',
           value: ''
         }
       ],
@@ -61,7 +61,7 @@ export default {
       ],
       tableRow: [
         { key: 'supplierName', label: '供应商名称' },
-        { key: 'supplierName', label: '商品名称' },
+        { key: 'productName', label: '商品名称' },
         { key: 'openingInventory', label: '期初库存' },
         { key: 'updateTime', label: '更新时间' },
         {
