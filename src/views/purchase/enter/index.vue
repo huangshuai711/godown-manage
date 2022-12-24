@@ -15,7 +15,6 @@
     ></Table>
     <Pagination ref="page" :total="total" class="flex-bot"></Pagination>
     <Details ref="detail" v-model="detailsShow"></Details>
-    <Edit ref="edit" v-model="editShow" @refresh="getData"></Edit>
   </div>
 </template>
 
@@ -26,10 +25,9 @@ import Pagination from '@/components/pagination'
 import { getCommodityList, exportCommodity } from '@/api/baseData'
 import { downloadFile } from '@/utils'
 import Details from './components/details.vue'
-import Edit from './components/edit.vue'
 export default {
   name: 'commodity-info',
-  components: { SearchFrom, Table, Pagination, Details, Edit },
+  components: { SearchFrom, Table, Pagination, Details },
   data() {
     return {
       formData: [
@@ -49,23 +47,16 @@ export default {
       btnArr: [
         { key: 'query', name: '查询' },
         { key: 'export', name: '导出' },
-        { key: 'reset', name: '重置' },
-        { key: 'add', name: '新增商品' }
+        { key: 'reset', name: '重置' }
       ],
       tableRow: [
         { key: 'productName', label: '商品名称' },
         { key: 'supplierName', label: '供应商' },
-        { key: 'openingInventory', label: '期初库存' },
-        { key: 'finalInventory', label: '期末库存' },
-        { key: 'productPrice', label: '价格' },
-        { key: 'updateTime', label: '更新时间' },
+        { key: 'finalInventory', label: '库存数量' },
         {
           key: 'operate',
           label: '操作',
-          btn: [
-            { key: 'details', name: '详情' },
-            { key: 'edit', name: '编辑' }
-          ]
+          btn: [{ key: 'purchase', name: '进货' }]
         }
       ],
       tableData: [],
@@ -87,8 +78,6 @@ export default {
         this.reset()
       } else if (key == 'export') {
         this.export()
-      } else if (key == 'add') {
-        this.add()
       }
     },
     query() {
@@ -105,25 +94,15 @@ export default {
         downloadFile(res, '商品信息')
       } catch (error) {}
     },
-    add() {
-      this.$refs.edit.data = null
-      this.editShow = true
-    },
     operateEvent(data) {
-      if (data.key == 'details') {
-        this.goDetails(data.row)
-      } else if (data.key == 'edit') {
-        this.edit(data.row)
+      if (data.key == 'purchase') {
+        this.goPurchase(data.row)
       }
     },
 
-    goDetails(row) {
+    goPurchase(row) {
       this.$refs.detail.data = row
       this.detailsShow = true
-    },
-    edit(row) {
-      this.$refs.edit.data = row
-      this.editShow = true
     },
     async getData() {
       try {

@@ -1,12 +1,21 @@
 <template>
   <el-dialog
-    title="商品详情"
+    title="进货"
     :visible.sync="childShow"
     :close-on-click-modal="false"
     width="600px"
     :before-close="close"
     center
-    ><Exhibition ref="exhibition" :formArr="formArr" :data="data"></Exhibition>
+  >
+    <el-form :model="formRole" ref="from" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="数量" prop="num">
+        <el-input-number v-model="formRole.num" :min="1"></el-input-number>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm()">提 交</el-button>
+        <el-button @click="close">取 消</el-button>
+      </el-form-item>
+    </el-form>
   </el-dialog>
 </template>
 <script>
@@ -26,25 +35,14 @@ export default {
   data() {
     return {
       childShow: this.fatherShow,
-      formArr: [
-        { type: 'text', label: '商品名称', prop: 'productName' },
-        { type: 'text', label: '供应商', prop: 'supplierName' },
-        { type: 'text', label: '期初库存', prop: 'openingInventory' },
-        { type: 'text', label: '期末库存', prop: 'finalInventory' },
-        { type: 'text', label: '价格', prop: 'productPrice' }
-      ],
+      formRole: {
+        num: 1
+      },
       data: null
     }
   },
   watch: {
     fatherShow(val) {
-      if (!val) {
-        this.$refs.exhibition.resetForm()
-      } else {
-        this.$nextTick(() => {
-          this.$refs.exhibition.echoData()
-        })
-      }
       this.childShow = val
     }
   },
@@ -52,6 +50,12 @@ export default {
   methods: {
     close() {
       this.$emit('shoChange', false)
+    },
+    submitForm() {
+      this.$refs.from.validate(valid => {
+        if (valid) {
+        }
+      })
     }
   }
 }
