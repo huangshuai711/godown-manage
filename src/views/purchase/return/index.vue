@@ -10,6 +10,8 @@
       :tableRow="tableRow"
       :tableData="tableData"
       :loading="loading"
+      :selection="true"
+      ref="table"
       @operateEvent="operateEvent"
       class="flex-fill"
     >
@@ -82,7 +84,16 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          okstockOut({ purchasesDtoList: this.purchases }).then(res => {
+          const ids = this.$refs.table.getIds()
+          const params = []
+          this.purchases.map(item => {
+            if (ids.includes(item.productId)) {
+              console.log('item', item, item.productId)
+              params.push(JSON.parse(JSON.stringify(item)))
+              item.num = 0
+            }
+          })
+          okstockOut({ purchasesDtoList: params }).then(res => {
             if (res.code == 200) {
               this.$message.success('退货成功')
               this.getData()
@@ -136,6 +147,7 @@ export default {
         const paging = this.$refs.page.getPage()
         const res = await getCommodityList(this.queryParam, paging)
         this.tableData = res.data.records
+        this.purchases = []
         this.tableData.forEach(item => {
           this.purchases.push({ productId: item.id, num: 0 })
         })

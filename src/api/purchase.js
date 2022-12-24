@@ -9,7 +9,7 @@ export function okpurchases(parameter) {
   })
 }
 
-// 进货
+// 退货
 export function okstockOut(parameter) {
   return request({
     url: '/api/purchases/stockOutStorage',
@@ -33,6 +33,14 @@ export function exportPurchases(parameter) {
     url: '/api/purchases/export',
     method: 'post',
     responseType: 'blob',
+    data: parameter
+  })
+}
+// 销售出库
+export function saleIssue(parameter) {
+  return request({
+    url: '/api/purchases/saleOutWarehouse',
+    method: 'POST',
     data: parameter
   })
 }

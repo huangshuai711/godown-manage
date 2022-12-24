@@ -3,10 +3,12 @@
     :data="tableData"
     :border="true"
     v-loading="loading"
+    ref="multipleTable"
     style="width: 100%"
     :cell-style="{ 'text-align': 'center' }"
     :header-cell-style="{ 'text-align': 'center' }"
-  >
+    @selection-change="handleSelectionChange"
+    ><el-table-column v-if="selection" type="selection" width="55"> </el-table-column>
     <el-table-column label="#" type="index" width="50"> </el-table-column>
     <el-table-column
       v-for="item in tableRow"
@@ -66,15 +68,35 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    selection: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
-    return {}
+    return {
+      multipleSelection: [],
+      multipleSelectionId: []
+    }
   },
   computed: {},
   methods: {
     operateEvent(row, key) {
       this.$emit('operateEvent', { row, key })
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+      this.multipleSelectionId = val.map(item => item.id)
+    },
+    clearSelection(rows) {
+      this.$refs.multipleTable.clearSelection()
+    },
+    getMultipleSelection() {
+      return this.multipleSelection
+    },
+    getIds() {
+      return this.multipleSelectionId
     }
   }
 }
