@@ -23,7 +23,7 @@
 import SearchFrom from '@/components/searchFrom'
 import Table from '@/components/table'
 import Pagination from '@/components/pagination'
-import { getRoleList, exportRole, changeRoleState, deleteUser } from '@/api/system'
+import { getRoleList, exportRole, changeRoleState } from '@/api/system'
 import { downloadFile } from '@/utils'
 import Details from './components/details.vue'
 import Edit from './components/edit.vue'
