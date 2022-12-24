@@ -113,7 +113,7 @@ export const menuList = [
         name: 'censusReturn',
         path: '/purchase/return',
         component: '/purchase/return',
-        meta: { title: '商品采购', icon: false }
+        meta: { title: '退货出库', icon: false }
       },
       {
         name: 'censusSingle',

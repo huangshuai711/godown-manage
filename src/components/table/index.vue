@@ -38,6 +38,9 @@
           >
           </el-image>
         </template>
+        <template v-else-if="item?.type == 'slot'">
+          <slot :name="item.key" :index="scope.$index"></slot>
+        </template>
         <template v-else>
           <span>{{
             item.dict
