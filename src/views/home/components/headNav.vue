@@ -1,6 +1,6 @@
 <template>
   <div class="headNav">
-    <div class="pro-name">运动用品购物管理后台</div>
+    <div class="pro-name">金管家仓库管理系统</div>
     <div class="info">
       <div class="name">欢迎您{{ userInfo?.username }}</div>
       <el-dropdown trigger="click" @command="handleCommand">
