@@ -5,7 +5,7 @@ import store from '@/store'
 import storage from 'store'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { menuList } from '@/config/menu'
-import { getUserInfoByToken, getAllMenuTree } from '@/api/user'
+import { getUserInfoByToken, getUserMenuTree } from '@/api/user'
 
 Vue.use(VueRouter)
 const originalPush = VueRouter.prototype.push
@@ -57,8 +57,9 @@ router.beforeEach(async (to, from, next) => {
       store.commit('SET_USERINFO', userInfo)
       // 添加路由
       let newRoutes = router.options.routes
-      // let menuList = await getAllMenuTree().then(res => res.data)
-      // store.commit('SET_MENUTREE', userInfo)
+      let menuLists = await getUserMenuTree(userInfo.id).then(res => res.data)
+      store.commit('SET_MENUTREE', menuLists)
+      console.log('menuLists', menuLists)
       menuList?.forEach(menu => {
         if (menu.children) {
           menu.children.forEach(e => {

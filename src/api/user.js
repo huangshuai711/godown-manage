@@ -37,7 +37,7 @@ export function eidtPassword(parameter) {
 }
 
 // 获取菜单
-export function getAllMenuTree(parameter) {
+export function getUserMenuTree(parameter) {
   return request({
     url: '/api/menu/menuTree',
     method: 'GET',
