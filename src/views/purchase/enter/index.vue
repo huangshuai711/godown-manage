@@ -10,6 +10,8 @@
       :tableRow="tableRow"
       :tableData="tableData"
       :loading="loading"
+      :selection="true"
+      ref="table"
       @operateEvent="operateEvent"
       class="flex-fill"
     >
@@ -82,11 +84,19 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          okpurchases({ purchasesDtoList: this.purchases }).then(res => {
+          const ids = this.$refs.table.getIds()
+          const params = []
+          this.purchases.map(item => {
+            if (ids.includes(item.productId)) {
+              console.log('item', item, item.productId)
+              params.push(JSON.parse(JSON.stringify(item)))
+              item.num = 0
+            }
+          })
+          okpurchases({ purchasesDtoList: params }).then(res => {
             if (res.code == 200) {
               this.$message.success('进货成功')
               this.getData()
-              this.cancel()
             }
           })
         })
@@ -136,10 +146,10 @@ export default {
         const paging = this.$refs.page.getPage()
         const res = await getCommodityList(this.queryParam, paging)
         this.tableData = res.data.records
+        this.purchases = []
         this.tableData.forEach(item => {
           this.purchases.push({ productId: item.id, num: 0 })
         })
-        console.log('this.purchases', this.purchases)
         this.total = res.data.total
         this.loading = false
       } catch (error) {}
