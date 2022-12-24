@@ -144,6 +144,15 @@ export function getTypeTree(parameter) {
   return request({
     url: `/api/singleProductType/tree`,
     method: 'GET',
+    data: parameteruserRole
+  })
+}
+
+// 角色授权
+export function userRole(parameter) {
+  return request({
+    url: `/api/userInfo/userRole`,
+    method: 'POST',
     data: parameter
   })
 }

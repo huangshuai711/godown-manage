@@ -9,7 +9,7 @@
     :header-cell-style="{ 'text-align': 'center' }"
     @selection-change="handleSelectionChange"
     ><el-table-column v-if="selection" type="selection" width="55"> </el-table-column>
-    <el-table-column label="#" type="index" width="50"> </el-table-column>
+    <el-table-column v-if="showIndex" label="#" type="index" width="50"> </el-table-column>
     <el-table-column
       v-for="item in tableRow"
       :key="item.key"
@@ -72,6 +72,10 @@ export default {
     selection: {
       type: Boolean,
       default: false
+    },
+    showIndex: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
