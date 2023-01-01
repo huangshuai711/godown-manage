@@ -110,10 +110,10 @@ export default {
                 accountArr.unshift({ username: this.ruleForm.username })
               }
               this.$store.commit('SET_ACCOUNTARR', accountArr)
-              window.location.reload()
             } else {
               this.$message.error(res.data.msg)
             }
+            window.location.reload()
           })
         } else {
           return false
@@ -143,12 +143,15 @@ export default {
   align-items: center;
   height: 100vh;
   width: 100vw;
+  background: url('../../../assets/login-bj.jpg');
+  background-size: 100% 100%;
   .form-box {
     margin-top: 10%;
     width: 300px;
     border-radius: 10px;
     padding: 20px 30px;
     box-shadow: 0px 0px 10px 6px rgba($color: #000, $alpha: 0.3);
+    background-color: #fff;
     .youke {
       text-align: right;
       margin-bottom: 30px;

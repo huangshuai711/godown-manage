@@ -59,7 +59,6 @@ router.beforeEach(async (to, from, next) => {
       let newRoutes = router.options.routes
       let menuLists = await getUserMenuTree(userInfo.id).then(res => res.data)
       store.commit('SET_MENUTREE', menuLists)
-      console.log('menuLists', menuLists)
       menuList?.forEach(menu => {
         if (menu.children) {
           menu.children.forEach(e => {
@@ -82,13 +81,13 @@ router.beforeEach(async (to, from, next) => {
         router.addRoute(x)
       }
       if ([...whiteList].includes(to.path)) {
-        next('/homePage')
+        next('/')
       } else {
         next({ ...to, replace: true })
       }
     } else {
       if ([...whiteList].includes(to.path)) {
-        next('/homePage')
+        next('/')
       } else {
         next()
       }
