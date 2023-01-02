@@ -84,7 +84,7 @@ export default {
     confirm() {
       const ids = this.$refs.treeTable.getIds()
       const params = {
-        userId: this.data.id,
+        roleId: this.data.id,
         menuIdList: ids
       }
       roleMenu(params).then(res => {
