@@ -4,7 +4,6 @@ import home from '../views/home/'
 import store from '@/store'
 import storage from 'store'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
-// import { menuList } from '@/config/menu'
 import { getUserInfoByToken, getUserMenuTree } from '@/api/user'
 
 Vue.use(VueRouter)
