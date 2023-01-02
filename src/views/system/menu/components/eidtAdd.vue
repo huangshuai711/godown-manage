@@ -33,6 +33,8 @@ export default {
       childShow: this.fatherShow,
       formArr: [
         { type: 'input', label: '菜单名称', prop: 'name', valueName: 'menuName', req: true },
+        { type: 'input', label: '路由', prop: 'menuPath', valueName: 'menuName', req: true },
+        { type: 'input', label: 'key', prop: 'menuName', valueName: 'menuName', req: true },
         {
           type: 'radioTree',
           label: '父级',

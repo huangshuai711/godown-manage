@@ -47,7 +47,8 @@ export default {
       treeData: [],
       loading: false,
       total: 0,
-      userMenuTree: []
+      userMenuTree: [],
+      ids: []
     }
   },
   watch: {
@@ -77,7 +78,7 @@ export default {
     async getUserMenu() {
       try {
         this.userMenuTree = await getRoleMenu(this.data.id).then(res => res.data)
-        this.$refs.treeTable.toggleSelection(this.userMenuTree)
+        this.echo(this.userMenuTree)
       } catch (error) {}
     },
     confirm() {
@@ -95,6 +96,19 @@ export default {
           this.$message.error(res.msg)
         }
       })
+    },
+    echo(tree) {
+      const ids = []
+      const loop = function (tre) {
+        tre.forEach(item => {
+          ids.push(item.id)
+          if (item.children?.length) {
+            loop(item.children)
+          }
+        })
+      }
+      loop(tree)
+      this.$refs.treeTable.toggleSelection(ids)
     }
   }
 }

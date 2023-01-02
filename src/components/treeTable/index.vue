@@ -163,11 +163,14 @@ export default {
     getIds() {
       return this.selectionsId
     },
+    setIds(ids) {
+      this.selectionsId = ids
+    },
     toggleSelection(rows, tree = this.treeData) {
       tree.forEach(item => {
-        const newRow = rows?.find(row => row.roleId == item.id)
+        const newRow = rows?.find(row => row == item.id)
         if (newRow) {
-          this.$refs.multiTable.toggleRowSelection(newRow)
+          this.$refs.multiTable.toggleRowSelection(item)
         }
         if (item.children?.length > 0) {
           this.toggleSelection(rows, item.children)

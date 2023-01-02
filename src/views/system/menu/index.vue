@@ -60,12 +60,12 @@ export default {
     },
     add() {
       this.$refs.editAdd.data = null
-      this.$refs.editAdd.treeData = this.treeData
+      this.$refs.editAdd.treeData = [{ id: '', name: '根目录' }, ...this.treeData]
       this.editAddShow = true
     },
     edit(row) {
       this.$refs.editAdd.data = row
-      this.$refs.editAdd.treeData = this.treeData
+      this.$refs.editAdd.treeData = [{ id: '', name: '根目录' }, ...this.treeData]
       this.editAddShow = true
     },
     delete(row) {
