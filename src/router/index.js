@@ -58,8 +58,8 @@ router.beforeEach(async (to, from, next) => {
       // 添加路由
       let newRoutes = router.options.routes
       let menuLists = await getUserMenuTree(userInfo.id).then(res => res.data)
-      store.commit('SET_MENUTREE', menuLists)
-      const menuList = menuFormat(menuLists)
+      const menuList = menuFormat(menuLists || [], 0)
+      store.commit('SET_MENUTREE', menuList)
       console.log('menuList', menuList)
       menuList?.forEach(menu => {
         if (menu.children) {
@@ -82,13 +82,14 @@ router.beforeEach(async (to, from, next) => {
       for (let x of newRoutes) {
         router.addRoute(x)
       }
-      if ([...whiteList].includes(to.path)) {
+      if (whiteList.includes(to.path)) {
+        console.log('123456')
         next('/')
       } else {
         next({ ...to, replace: true })
       }
     } else {
-      if ([...whiteList].includes(to.path)) {
+      if (whiteList.includes(to.path)) {
         next('/')
       } else {
         next()

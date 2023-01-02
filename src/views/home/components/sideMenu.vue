@@ -28,12 +28,9 @@
   </el-menu>
 </template>
 <script>
-import { menuList } from '@/config/menu'
 export default {
   data() {
-    return {
-      menuList: menuList
-    }
+    return {}
   },
   computed: {
     editableTabsValue() {
@@ -45,6 +42,9 @@ export default {
         .map(item => {
           return item?.path
         })
+    },
+    menuList() {
+      return this.$store.getters.getMenuTree
     }
   },
   methods: {

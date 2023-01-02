@@ -17,7 +17,7 @@ const user = {
       state.userInfo = userInfo
     },
     SET_ACCOUNTARR: (state, accountArr) => {
-      storage.set(STORAGE_ACCOUNT, window.btoa(JSON.stringify(accountArr)))
+      storage.set(STORAGE_ACCOUNT, window.btoa(encodeURIComponent(JSON.stringify(accountArr))))
       state.accountArr = accountArr
     }
   },
@@ -29,8 +29,8 @@ const user = {
       return state.userInfo
     },
     getAccountArr(state) {
-      return window.atob(storage.get(STORAGE_ACCOUNT))
-        ? JSON.parse(window.atob(storage.get(STORAGE_ACCOUNT)))
+      return storage.get(STORAGE_ACCOUNT) && window.atob(storage.get(STORAGE_ACCOUNT))
+        ? JSON.parse(decodeURIComponent(window.atob(storage.get(STORAGE_ACCOUNT))), true)
         : state.accountArr
     }
   },
