@@ -4,7 +4,7 @@ import home from '../views/home/'
 import store from '@/store'
 import storage from 'store'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
-import { menuList } from '@/config/menu'
+// import { menuList } from '@/config/menu'
 import { getUserInfoByToken, getUserMenuTree } from '@/api/user'
 
 Vue.use(VueRouter)
@@ -59,6 +59,8 @@ router.beforeEach(async (to, from, next) => {
       let newRoutes = router.options.routes
       let menuLists = await getUserMenuTree(userInfo.id).then(res => res.data)
       store.commit('SET_MENUTREE', menuLists)
+      const menuList = menuFormat(menuLists)
+      console.log('menuList', menuList)
       menuList?.forEach(menu => {
         if (menu.children) {
           menu.children.forEach(e => {
@@ -101,6 +103,26 @@ router.beforeEach(async (to, from, next) => {
   }
 })
 
+const menuFormat = (tree, layer) => {
+  const new_menu = []
+  tree.forEach(item => {
+    const new_item = {
+      name: item.menuName,
+      path: item.menuPath,
+      meta: {
+        title: item.name,
+        icon: layer ? false : 'setting'
+      }
+    }
+    if (item.children?.length) {
+      new_item.children = menuFormat(item.children, layer++)
+    } else {
+      new_item.component = item.menuPath
+    }
+    new_menu.push(new_item)
+  })
+  return new_menu
+}
 const menuToRoute = menu => {
   if (!menu.component) {
     return null
