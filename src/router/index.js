@@ -17,7 +17,13 @@ const routes = [
     path: '/',
     name: 'home',
     component: home,
-    children: []
+    children: [
+      {
+        path: 'homePage',
+        name: 'homePage',
+        component: () => import('@/views/homePage')
+      }
+    ]
   },
   {
     path: '/user',
@@ -81,15 +87,14 @@ router.beforeEach(async (to, from, next) => {
       for (let x of newRoutes) {
         router.addRoute(x)
       }
-      if (whiteList.includes(to.path)) {
-        console.log('123456')
-        next('/')
+      if (['/', ...whiteList].includes(to.path)) {
+        next('/homePage')
       } else {
         next({ ...to, replace: true })
       }
     } else {
-      if (whiteList.includes(to.path)) {
-        next('/')
+      if (['/', ...whiteList].includes(to.path)) {
+        next('/homePage')
       } else {
         next()
       }

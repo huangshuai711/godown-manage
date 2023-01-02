@@ -9,7 +9,7 @@ export default {
     editableTabs: [
       {
         title: '首页',
-        name: 'home',
+        name: 'homePage',
         icon: 'homePage'
       }
     ],

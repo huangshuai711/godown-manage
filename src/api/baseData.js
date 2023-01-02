@@ -138,7 +138,7 @@ export function exportStock(parameter) {
 }
 
 // 获取预警列表
-export function getWarningList(parameter) {
+export function getWarningList(parameter = {}) {
   return request({
     url: `/api/clients/inventoryWarning`,
     method: 'post',
@@ -147,7 +147,7 @@ export function getWarningList(parameter) {
 }
 
 // 获取采购统计列表
-export function getPurchaseList(parameter) {
+export function getPurchaseList(parameter = {}) {
   return request({
     url: `/api/clients/productPurchase`,
     method: 'post',
@@ -156,7 +156,7 @@ export function getPurchaseList(parameter) {
 }
 
 // 获取销售统计列表
-export function getSellList(parameter) {
+export function getSellList(parameter = {}) {
   return request({
     url: `/api/clients/productSelling`,
     method: 'post',
@@ -164,7 +164,7 @@ export function getSellList(parameter) {
   })
 }
 // 获取按日统计列表
-export function getDayList(parameter) {
+export function getDayList(parameter = {}) {
   return request({
     url: `/api/clients/dayStatistics`,
     method: 'post',
@@ -173,7 +173,7 @@ export function getDayList(parameter) {
 }
 
 // 获取按月统计列表
-export function getMonthList(parameter) {
+export function getMonthList(parameter = {}) {
   return request({
     url: `/api/clients/monthStatistics`,
     method: 'post',
