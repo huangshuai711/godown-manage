@@ -20,11 +20,10 @@ export function saveOrUpdateMenu(parameter) {
 }
 
 // 删除菜单
-export function removeMenu(parameter) {
+export function removeMenu(id) {
   return request({
-    url: '/api/menu/removeMenu',
-    method: 'post',
-    data: parameter
+    url: `/api/menu/removeMenu/${id}`,
+    method: 'post'
   })
 }
 

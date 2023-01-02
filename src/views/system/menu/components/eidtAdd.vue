@@ -32,9 +32,9 @@ export default {
     return {
       childShow: this.fatherShow,
       formArr: [
-        { type: 'input', label: '菜单名称', prop: 'name', valueName: 'menuName', req: true },
-        { type: 'input', label: '路由', prop: 'menuPath', valueName: 'menuName', req: true },
-        { type: 'input', label: 'key', prop: 'menuName', valueName: 'menuName', req: true },
+        { type: 'input', label: '菜单名称', prop: 'name', req: true },
+        { type: 'input', label: 'key', prop: 'menuName', req: true },
+        { type: 'input', label: '路由', prop: 'menuPath', req: true },
         {
           type: 'radioTree',
           label: '父级',
@@ -83,7 +83,7 @@ export default {
           const params = this.$refs.formlists.getData()
 
           params.pid = Array.isArray(params.pid) ? params.pid?.[params.pid?.length - 1] : params.pid
-          params.menuName = params.name
+          params.menuTitle = params.name
           this.data?.id && (params.id = this.data.id)
           const res = await saveOrUpdateMenu(params)
           if (res.code == 200) {

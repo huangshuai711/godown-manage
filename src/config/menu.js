@@ -110,25 +110,25 @@ export const menuList = [
         meta: { title: '进货入库', icon: false }
       },
       {
-        name: 'censusReturn',
+        name: 'purchaseReturn',
         path: '/purchase/return',
         component: '/purchase/return',
         meta: { title: '退货出库', icon: false }
       },
       {
-        name: 'censusSingle',
+        name: 'purchaseSingle',
         path: '/purchase/single',
         component: '/purchase/single',
         meta: { title: '进货单据查询', icon: false }
       },
       {
-        name: 'censusRsingle',
+        name: 'purchaseRsingle',
         path: '/purchase/rsingle',
         component: '/purchase/rsingle',
         meta: { title: '退货单据查询', icon: false }
       },
       {
-        name: 'censusMow',
+        name: 'purchaseNow',
         path: '/purchase/now',
         component: '/purchase/now',
         meta: { title: '当前库存查询', icon: false }
@@ -147,19 +147,19 @@ export const menuList = [
         meta: { title: '销售出库', icon: false }
       },
       {
-        name: 'censusTuiho',
+        name: 'saleTuiho',
         path: '/sale/tuiho',
         component: '/sale/tuiho',
         meta: { title: '客户退货', icon: false }
       },
       {
-        name: 'censusSingle',
+        name: 'saleSingle',
         path: '/sale/single',
         component: '/sale/single',
         meta: { title: '销售单据查询', icon: false }
       },
       {
-        name: 'censusTuihoc',
+        name: 'saleTuihoc',
         path: '/sale/tuihoc',
         component: '/sale/tuihoc',
         meta: { title: '客户退货查询', icon: false }
