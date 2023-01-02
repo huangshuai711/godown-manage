@@ -34,13 +34,6 @@ export default {
       formArr: [
         { type: 'upAvatar', label: '用户头像', prop: 'avatar', upType: 'img' },
         { type: 'input', label: '用户名', prop: 'username', req: true },
-        {
-          type: 'radio',
-          label: '用户身份',
-          prop: 'userType',
-          req: true,
-          dict: this.$dict.system.userType
-        },
         { type: 'input', label: '联系电话', prop: 'telephone', req: true, check: 'phone' },
         { type: 'input', label: '邮箱', prop: 'email', req: true, check: 'email' },
         { type: 'address', label: '地址', prop: 'address', req: true }

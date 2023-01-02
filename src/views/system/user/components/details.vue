@@ -29,7 +29,6 @@ export default {
       formArr: [
         { type: 'img', label: '用户头像', prop: 'avatar' },
         { type: 'text', label: '用户名', prop: 'username' },
-        { type: 'text', label: '用户身份', prop: 'userType', dict: this.$dict.system.userType },
         { type: 'text', label: '联系电话', prop: 'telephone' },
         { type: 'text', label: '邮箱', prop: 'email' },
         { type: 'text', label: '地址', prop: 'address' }
