@@ -140,7 +140,7 @@ export default {
     async export() {
       try {
         const res = await exportSuppliers(this.queryParam)
-        downloadFile(res, '客户信息')
+        downloadFile(res, '供应商信息')
       } catch (error) {}
     },
     add() {

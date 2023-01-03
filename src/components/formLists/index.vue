@@ -97,6 +97,17 @@
       <template v-else-if="item.type == 'textarea'">
         <el-input type="textarea" v-model="ruleForm[item.prop]"></el-input>
       </template>
+      <template v-else-if="item.type == 'select'">
+        <el-select style="width: 100%" v-model="ruleForm[item.prop]" placeholder="请选择">
+          <el-option
+            v-for="opt in item.options"
+            :key="opt[item.id]"
+            :label="opt[item.name]"
+            :value="opt[item.id]"
+          >
+          </el-option>
+        </el-select>
+      </template>
     </el-form-item>
   </el-form>
 </template>

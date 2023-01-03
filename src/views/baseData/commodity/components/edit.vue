@@ -16,6 +16,7 @@
 <script>
 import FormLists from '@/components/formLists'
 import { addCommodity, editCommodity } from '@/api/baseData'
+import { getSuppliersList } from '@/api/baseData'
 export default {
   components: { FormLists },
   model: {
@@ -33,7 +34,15 @@ export default {
       childShow: this.fatherShow,
       formArr: [
         { type: 'input', label: '商品名称', prop: 'productName', req: true },
-        { type: 'input', label: '供应商', prop: 'supplierName', req: true },
+        {
+          type: 'select',
+          label: '供应商',
+          prop: 'supplierId',
+          options: [],
+          name: 'supplierName',
+          id: 'id',
+          req: true
+        },
         { type: 'input', label: '期初库存', prop: 'openingInventory', req: true },
         { type: 'input', label: '期末库存', prop: 'finalInventory', req: true },
         { type: 'input', label: '价格', prop: 'productPrice', req: true }
@@ -47,6 +56,7 @@ export default {
         this.$refs.formlists.resetForm()
       } else {
         // 数据处理
+        this.geSuppliers()
         this.$nextTick(() => {
           this.$refs.formlists.echoData()
         })
@@ -60,6 +70,12 @@ export default {
     }
   },
   methods: {
+    async geSuppliers() {
+      try {
+        const res = await getSuppliersList({}, { pageNum: 1, pageSize: 100 })
+        this.formArr.find(item => item.prop == 'supplierId').options = res?.data?.records || []
+      } catch (error) {}
+    },
     close() {
       this.$emit('shoChange', false)
     },
