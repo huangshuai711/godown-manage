@@ -26,6 +26,14 @@ export function removeMenu(id) {
     method: 'post'
   })
 }
+// 删除菜单
+export function editMenuStatus(parameter) {
+  return request({
+    url: `/api/menu/editStatus`,
+    method: 'post',
+    data: parameter
+  })
+}
 
 // 获取用户列表
 export function getUserList(parameter, paging) {

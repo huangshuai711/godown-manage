@@ -16,7 +16,7 @@
 
 <script>
 import TreeTable from '@/components/treeTable'
-import { getSllMenuTree, removeMenu } from '@/api/system'
+import { getSllMenuTree, removeMenu, editMenuStatus } from '@/api/system'
 import EidtAdd from './components/eidtAdd.vue'
 export default {
   name: 'commodity-sort',
@@ -26,6 +26,14 @@ export default {
       treeRow: [
         { key: 'name', label: '类型' },
         {
+          key: 'menuState',
+          label: '启用状态',
+          dict: [
+            { val: 1, text: '启用' },
+            { val: 2, text: '禁用' }
+          ]
+        },
+        {
           key: 'operate',
           label: '操作',
           btn: [
@@ -34,7 +42,7 @@ export default {
             { key: 'addPeer', name: '添加同级菜单' },
             { key: 'addSub', name: '添加子级菜单' },
             // { key: 'addSub', dict: { 2: '上架', 1: '下架' }, link: 'productStatus' },
-            { key: 'revive', name: '启禁用菜单' }
+            { key: 'revive', dict: { 2: '启用菜单', 1: '禁用菜单' }, link: 'menuState' }
           ]
         }
       ],
@@ -94,16 +102,17 @@ export default {
       this.$refs.editAdd.treeData = this.treeData
       this.editAddShow = true
     },
-    revive() {
-      this.$confirm(`确认删除此菜单？`, '提示', {
+    revive(row) {
+      const text = row.menuState == 1 ? '禁用' : '启用'
+      this.$confirm(`确认${text}此菜单？`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        removeMenu(row.id).then(res => {
+        editMenuStatus({ menuId: row.id }).then(res => {
           if (res.code == 200) {
             this.getData()
-            this.$message.success('删除成功')
+            this.$message.success(`${text}成功`)
           } else {
             this.$message.error(res.msg)
           }

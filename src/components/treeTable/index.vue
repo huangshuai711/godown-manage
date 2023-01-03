@@ -32,7 +32,7 @@
               </el-button>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item v-for="btn in item.btn" :key="btn.key" :command="btn.key">{{
-                  btn.name
+                  btn.dict ? btn.dict[scope.row[btn.link]] : btn.name
                 }}</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -40,7 +40,7 @@
           <template v-else>
             <span>{{
               item.dict
-                ? item.dict.find(dic => dic.val == scope.row[item.key]).text
+                ? item.dict.find(dic => dic.val == scope.row[item.key])?.text
                 : scope.row[item.key]
             }}</span>
           </template>
