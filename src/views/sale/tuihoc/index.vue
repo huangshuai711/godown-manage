@@ -22,7 +22,7 @@
 import SearchFrom from '@/components/searchFrom'
 import Table from '@/components/table'
 import Pagination from '@/components/pagination'
-import { getPurchasesList, exportPurchases } from '@/api/purchase'
+import { getPurchasesList, exportPurchases, getdjDetails } from '@/api/purchase'
 import { downloadFile } from '@/utils'
 import Details from './components/details.vue'
 export default {
@@ -89,8 +89,8 @@ export default {
       }
     },
 
-    goDetails(row) {
-      this.$refs.detail.data = row
+    async goDetails(row) {
+      this.$refs.detail.data = await getdjDetails(row.id).then(res => res.data)
       this.detailsShow = true
     },
     async getData() {

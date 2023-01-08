@@ -50,7 +50,8 @@ export default {
       tableRow: [
         { key: 'datetime', label: '日期' },
         { key: 'productName', label: '商品名称' },
-        { key: 'num', label: '销售数量' }
+        { key: 'num', label: '销售数量' },
+        { key: 'price', label: '销售金额' }
       ],
       tableData: [],
       total: 0,
@@ -90,7 +91,6 @@ export default {
     async getData() {
       try {
         this.loading = true
-        // const paging = this.$refs.page.getPage()
         const res = await getDayList(this.queryParam)
         this.tableData = res.data
         this.total = res.data.total

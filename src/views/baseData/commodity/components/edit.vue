@@ -43,8 +43,6 @@ export default {
           id: 'id',
           req: true
         },
-        { type: 'input', label: '期初库存', prop: 'openingInventory', req: true },
-        { type: 'input', label: '期末库存', prop: 'finalInventory', req: true },
         { type: 'input', label: '价格', prop: 'productPrice', req: true }
       ],
       data: null

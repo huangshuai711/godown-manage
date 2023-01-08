@@ -43,7 +43,7 @@ export default {
         { key: 'productName', label: '商品名称' },
         { key: 'supplierName', label: '供应商名称' },
         { key: 'clientName', label: '客户名称' },
-        { key: 'supplierName', label: '退货数量' }
+        { key: 'stockNum', label: '退货数量' }
       ],
       data: null
     }

@@ -1,15 +1,16 @@
 <template>
   <div class="homePage">
-    <div ref="echart1" class="echart"></div>
-    <div ref="echart11" class="echart"></div>
-    <div ref="echart2" class="echart"></div>
-    <div ref="echart21" class="echart"></div>
-    <div ref="echart3" class="echart"></div>
-    <div ref="echart31" class="echart"></div>
-    <div ref="echart4" class="echart"></div>
-    <div ref="echart41" class="echart"></div>
-    <div ref="echart5" class="echart"></div>
-    <div ref="echart51" class="echart"></div>
+    <div>
+      <div ref="echart1" class="echart"></div>
+    </div>
+    <div>
+      <div ref="echart4" class="echart"></div>
+      <div ref="echart41" class="echart"></div>
+    </div>
+    <div>
+      <div ref="echart5" class="echart"></div>
+      <div ref="echart51" class="echart"></div>
+    </div>
   </div>
 </template>
 
@@ -33,8 +34,6 @@ export default {
   components: {},
   mounted() {
     this.getWarningLists()
-    this.getPurchaseLists()
-    this.getSellLists()
     this.getDayLists()
     this.getMonthLists()
   },
@@ -56,7 +55,6 @@ export default {
         })
         this.$nextTick(() => {
           var myChart1 = echarts.init(this.$refs.echart1)
-          var myChart2 = echarts.init(this.$refs.echart11)
           myChart1.setOption({
             title: {
               text: '预警统计表'
@@ -74,115 +72,6 @@ export default {
               }
             ]
           })
-          myChart2.setOption({
-            xAxis: {
-              type: 'category',
-              data: names
-            },
-            yAxis: {
-              type: 'value'
-            },
-            series: [
-              {
-                data: values,
-                type: 'line'
-              }
-            ]
-          })
-        })
-      } catch (error) {}
-    },
-    async getPurchaseLists() {
-      try {
-        const res = await getPurchaseList()
-        const names = []
-        const values = []
-        res.data.forEach(item => {
-          names.push(item.productName)
-          values.push(item.num)
-        })
-        this.$nextTick(() => {
-          var myChart1 = echarts.init(this.$refs.echart2)
-          var myChart2 = echarts.init(this.$refs.echart21)
-          myChart1.setOption({
-            title: {
-              text: '采购统计列表'
-            },
-            tooltip: {},
-            xAxis: {
-              data: names
-            },
-            yAxis: {},
-            series: [
-              {
-                name: '销量',
-                type: 'bar',
-                data: values
-              }
-            ]
-          })
-          myChart2.setOption({
-            xAxis: {
-              type: 'category',
-              data: names
-            },
-            yAxis: {
-              type: 'value'
-            },
-            series: [
-              {
-                data: values,
-                type: 'line'
-              }
-            ]
-          })
-        })
-      } catch (error) {}
-    },
-    async getSellLists() {
-      try {
-        const res = await getSellList()
-        const names = []
-        const values = []
-        res.data.forEach(item => {
-          names.push(item.productName || '')
-          values.push(item.num)
-        })
-        this.$nextTick(() => {
-          var myChart1 = echarts.init(this.$refs.echart3)
-          var myChart2 = echarts.init(this.$refs.echart31)
-          myChart1.setOption({
-            title: {
-              text: '销售统计列表'
-            },
-            tooltip: {},
-            xAxis: {
-              data: names
-            },
-            yAxis: {},
-            series: [
-              {
-                name: '销量',
-                type: 'bar',
-                data: values
-              }
-            ]
-          })
-          myChart2.setOption({
-            xAxis: {
-              type: 'category',
-              data: names
-            },
-            yAxis: {
-              type: 'value'
-            },
-            series: [
-              {
-                data: values,
-                type: 'line'
-              }
-            ]
-          })
         })
       } catch (error) {}
     },
@@ -191,10 +80,13 @@ export default {
         const res = await getDayList()
         const names = []
         const values = []
+        const prices = []
         res.data.forEach(item => {
-          names.push(item.productName || '')
+          names.push(item.productName)
           values.push(item.num)
+          prices.push(item.price)
         })
+        console.log('names', names)
         this.$nextTick(() => {
           var myChart1 = echarts.init(this.$refs.echart4)
           var myChart2 = echarts.init(this.$refs.echart41)
@@ -202,7 +94,12 @@ export default {
             title: {
               text: '按日统计列表'
             },
-            tooltip: {},
+            tooltip: {
+              formatter: function (arg, ind) {
+                return `销量: ${arg.data}
+                单价: ${prices[arg.dataIndex]}`
+              }
+            },
             xAxis: {
               data: names
             },
@@ -219,6 +116,12 @@ export default {
             xAxis: {
               type: 'category',
               data: names
+            },
+            tooltip: {
+              formatter: function (arg, ind) {
+                return `销量: ${arg.data}
+                单价: ${prices[arg.dataIndex]}`
+              }
             },
             yAxis: {
               type: 'value'
@@ -238,9 +141,11 @@ export default {
         const res = await getMonthList()
         const names = []
         const values = []
+        const prices = []
         res.data.forEach(item => {
           names.push(item.productName || '')
           values.push(item.num)
+          prices.push(item.price)
         })
         this.$nextTick(() => {
           var myChart1 = echarts.init(this.$refs.echart5)
@@ -249,7 +154,12 @@ export default {
             title: {
               text: '按月统计列表'
             },
-            tooltip: {},
+            tooltip: {
+              formatter: function (arg, ind) {
+                return `销量: ${arg.data}
+                单价: ${prices[arg.dataIndex]}`
+              }
+            },
             xAxis: {
               data: names
             },
@@ -266,6 +176,12 @@ export default {
             xAxis: {
               type: 'category',
               data: names
+            },
+            tooltip: {
+              formatter: function (arg, ind) {
+                return `销量: ${arg.data}
+                单价: ${prices[arg.dataIndex]}`
+              }
             },
             yAxis: {
               type: 'value'

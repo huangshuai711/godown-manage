@@ -53,3 +53,11 @@ export function getSaleInWareList(parameter, paging) {
     data: parameter
   })
 }
+
+// 获取单据详情
+export function getdjDetails(id) {
+  return request({
+    url: `/api/purchases/getDocumentInfo/${id}`,
+    method: 'GET'
+  })
+}
