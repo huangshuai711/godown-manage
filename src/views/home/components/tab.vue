@@ -1,16 +1,11 @@
 <template>
   <div>
-    <el-tabs
-      v-model="editableTabsValue"
-      type="card"
-      closable
-      @tab-remove="removeTab"
-      @tab-click="clickTab"
-    >
+    <el-tabs v-model="editableTabsValue" type="card" @tab-remove="removeTab" @tab-click="clickTab">
       <el-tab-pane
         v-for="(item, index) in editableTabs"
         :key="item.name"
         :label="item.title"
+        :closable="item.name != 'homePage'"
         :name="item.name"
       >
       </el-tab-pane>
@@ -45,6 +40,7 @@ export default {
     removeTab(targetName) {
       let tabs = this.editableTabs
       let activeName = this.editableTabsValue
+      console.log('activeName', activeName)
       if (activeName === 'homePage') {
         return
       }
