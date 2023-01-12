@@ -88,7 +88,6 @@ export default {
           const params = []
           this.purchases.map(item => {
             if (ids.includes(item.productId)) {
-              console.log('item', item, item.productId)
               params.push(JSON.parse(JSON.stringify(item)))
               item.num = 0
             }
