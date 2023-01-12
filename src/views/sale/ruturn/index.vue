@@ -16,26 +16,39 @@
       class="flex-fill"
     >
       <template slot="num" slot-scope="{ index }">
-        <el-input-number v-model="purchases[index].num" :min="0"></el-input-number>
+        <el-form>
+          <el-form-item :error="purchases[index].nerror">
+            <el-input-number
+              v-model="purchases[index].num"
+              @change="tableNumChange(index)"
+              :min="0"
+            ></el-input-number>
+          </el-form-item>
+        </el-form>
       </template>
       <template slot="target" slot-scope="{ index }">
-        <el-select
-          v-model="purchases[index].clientId"
-          filterable
-          remote
-          reserve-keyword
-          placeholder="请选择客户"
-          :remote-method="remoteMethod"
-          :loading="loadings"
-        >
-          <el-option
-            v-for="item in clientList"
-            :key="item.id"
-            :label="item.clientName"
-            :value="item.id"
-          >
-          </el-option>
-        </el-select>
+        <el-form>
+          <el-form-item :error="purchases[index].cerror">
+            <el-select
+              v-model="purchases[index].clientId"
+              filterable
+              remote
+              @change="tableClientChange(index)"
+              reserve-keyword
+              placeholder="请选择客户"
+              :remote-method="remoteMethod"
+              :loading="loadings"
+            >
+              <el-option
+                v-for="item in clientList"
+                :key="item.id"
+                :label="item.clientName"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
       </template>
     </Table>
     <Pagination ref="page" :total="total" class="flex-bot" @refresh="getData"></Pagination>
@@ -97,6 +110,16 @@ export default {
     this.remoteMethod()
   },
   methods: {
+    tableNumChange(index) {
+      if (this.purchases[index].num) {
+        this.$set(this.purchases[index], 'nerror', '')
+      }
+    },
+    tableClientChange(index) {
+      if (this.purchases[index].clientId) {
+        this.$set(this.purchases[index], 'cerror', '')
+      }
+    },
     async remoteMethod(query) {
       this.loadings = true
       this.clientList = await getClientList(
@@ -114,11 +137,25 @@ export default {
         .then(() => {
           const ids = this.$refs.table.getIds()
           const params = []
+          let error = 0
           this.purchases.map(item => {
             if (ids.includes(item.productId)) {
+              if (!item.num) {
+                item.nerror = '请添加数量'
+                error++
+              }
+              if (!item.clientId) {
+                item.cerror = '请选择用户'
+                error++
+              }
               params.push(JSON.parse(JSON.stringify(item)))
-              item.num = 0
             }
+          })
+          if (error) {
+            return
+          }
+          this.purchases.map(item => {
+            item.num = 0
           })
           saleIssue({ purchasesDtoList: params }).then(res => {
             if (res.code == 200) {
@@ -176,9 +213,8 @@ export default {
         this.tableData = res.data.records
         this.purchases = []
         this.tableData.forEach(item => {
-          this.purchases.push({ productId: item.id, num: 0, clientId: '' })
+          this.purchases.push({ productId: item.id, num: 0, clientId: '', nerror: '', cerror: '' })
         })
-        console.log('this.purchases', this.purchases)
         this.total = res.data.total
         this.loading = false
       } catch (error) {}
