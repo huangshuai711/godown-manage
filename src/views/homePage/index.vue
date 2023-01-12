@@ -97,7 +97,7 @@ export default {
             tooltip: {
               formatter: function (arg, ind) {
                 return `销量: ${arg.data}
-                单价: ${prices[arg.dataIndex]}`
+                金额: ${prices[arg.dataIndex]}`
               }
             },
             xAxis: {
@@ -120,7 +120,7 @@ export default {
             tooltip: {
               formatter: function (arg, ind) {
                 return `销量: ${arg.data}
-                单价: ${prices[arg.dataIndex]}`
+                金额: ${prices[arg.dataIndex]}`
               }
             },
             yAxis: {
@@ -157,7 +157,7 @@ export default {
             tooltip: {
               formatter: function (arg, ind) {
                 return `销量: ${arg.data}
-                单价: ${prices[arg.dataIndex]}`
+                金额: ${prices[arg.dataIndex]}`
               }
             },
             xAxis: {
@@ -180,7 +180,7 @@ export default {
             tooltip: {
               formatter: function (arg, ind) {
                 return `销量: ${arg.data}
-                单价: ${prices[arg.dataIndex]}`
+                金额: ${prices[arg.dataIndex]}`
               }
             },
             yAxis: {
