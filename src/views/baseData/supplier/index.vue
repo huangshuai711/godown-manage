@@ -156,6 +156,7 @@ export default {
         .then(res => {
           if (res.code == 200) {
             this.$message.success('导入成功')
+            this.getData()
           } else {
             this.$message.error(res.msg)
           }
