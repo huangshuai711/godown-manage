@@ -125,4 +125,7 @@ export default {
   padding: 0;
   height: 54px;
 }
+::v-deep.el-table::before {
+  display: none;
+}
 </style>
