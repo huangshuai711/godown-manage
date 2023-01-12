@@ -1,7 +1,6 @@
 <template>
   <div class="login">
     <div class="form-box">
-      <div class="youke"><el-link>游客登录</el-link></div>
       <el-form
         :model="ruleForm"
         :rules="rules"

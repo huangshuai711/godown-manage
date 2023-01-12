@@ -68,7 +68,12 @@ export default {
               {
                 name: '收藏',
                 type: 'bar',
-                data: values
+                data: values,
+                itemStyle: {
+                        normal: {
+                            color:function(){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
+                        },
+                    },
               }
             ]
           })
@@ -97,7 +102,7 @@ export default {
             tooltip: {
               formatter: function (arg, ind) {
                 return `销量: ${arg.data}
-                单价: ${prices[arg.dataIndex]}`
+                金额: ${prices[arg.dataIndex]}`
               }
             },
             xAxis: {
@@ -108,7 +113,12 @@ export default {
               {
                 name: '销量',
                 type: 'bar',
-                data: values
+                data: values,
+                itemStyle: {
+                        normal: {
+                            color:function(){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
+                        },
+                    },
               }
             ]
           })
@@ -120,7 +130,7 @@ export default {
             tooltip: {
               formatter: function (arg, ind) {
                 return `销量: ${arg.data}
-                单价: ${prices[arg.dataIndex]}`
+                金额: ${prices[arg.dataIndex]}`
               }
             },
             yAxis: {
@@ -129,7 +139,12 @@ export default {
             series: [
               {
                 data: values,
-                type: 'line'
+                type: 'line',
+                itemStyle: {
+                        normal: {
+                            color:function(){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
+                        },
+                    },
               }
             ]
           })
@@ -157,7 +172,7 @@ export default {
             tooltip: {
               formatter: function (arg, ind) {
                 return `销量: ${arg.data}
-                单价: ${prices[arg.dataIndex]}`
+                金额: ${prices[arg.dataIndex]}`
               }
             },
             xAxis: {
@@ -168,7 +183,12 @@ export default {
               {
                 name: '销量',
                 type: 'bar',
-                data: values
+                data: values,
+                itemStyle: {
+                        normal: {
+                            color:function(){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
+                        },
+                    },
               }
             ]
           })
@@ -180,7 +200,7 @@ export default {
             tooltip: {
               formatter: function (arg, ind) {
                 return `销量: ${arg.data}
-                单价: ${prices[arg.dataIndex]}`
+                金额: ${prices[arg.dataIndex]}`
               }
             },
             yAxis: {
@@ -189,7 +209,12 @@ export default {
             series: [
               {
                 data: values,
-                type: 'line'
+                type: 'line',
+                itemStyle: {
+                        normal: {
+                            color:function(){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
+                        },
+                    },
               }
             ]
           })

@@ -31,7 +31,7 @@ export default {
       formData: [
         {
           type: 'date',
-          name: '采购时间',
+          name: '销售时间',
           key: ['updateStartTime', 'updateEndTime'],
           value: []
         },
@@ -57,8 +57,8 @@ export default {
         { key: 'productName', label: '商品名称' },
         { key: 'supplierName', label: '供应商' },
         { key: 'num', label: '销售数量' },
-        { key: 'createName', label: '采购人' },
-        { key: 'createTime', label: '采购时间' }
+        { key: 'createName', label: '销售人' },
+        { key: 'createTime', label: '销售时间' }
       ],
       tableData: [],
       total: 0,
