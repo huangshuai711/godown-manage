@@ -70,10 +70,12 @@ export default {
                 type: 'bar',
                 data: values,
                 itemStyle: {
-                        normal: {
-                            color:function(){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
-                        },
-                    },
+                  normal: {
+                    color: function () {
+                      return '#' + Math.floor(Math.random() * (256 * 256 * 256 - 1)).toString(16)
+                    }
+                  }
+                }
               }
             ]
           })
@@ -86,12 +88,13 @@ export default {
         const names = []
         const values = []
         const prices = []
+        const data = []
         res.data.forEach(item => {
           names.push(item.productName)
           values.push(item.num)
           prices.push(item.price)
+          data.push({ value: item.num || 0, name: item.productName || '' })
         })
-        console.log('names', names)
         this.$nextTick(() => {
           var myChart1 = echarts.init(this.$refs.echart4)
           var myChart2 = echarts.init(this.$refs.echart41)
@@ -115,36 +118,47 @@ export default {
                 type: 'bar',
                 data: values,
                 itemStyle: {
-                        normal: {
-                            color:function(){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
-                        },
-                    },
+                  normal: {
+                    color: function () {
+                      return '#' + Math.floor(Math.random() * (256 * 256 * 256 - 1)).toString(16)
+                    }
+                  }
+                }
               }
             ]
           })
           myChart2.setOption({
-            xAxis: {
-              type: 'category',
-              data: names
+            legend: {
+              top: 'bottom'
+            },
+            toolbox: {
+              show: true,
+              feature: {
+                saveAsImage: { show: true }
+              }
             },
             tooltip: {
               formatter: function (arg, ind) {
-                return `销量: ${arg.data}
+                return `销量: ${arg.data.value}
                 金额: ${prices[arg.dataIndex]}`
               }
             },
-            yAxis: {
-              type: 'value'
-            },
             series: [
               {
-                data: values,
-                type: 'line',
+                name: 'Nightingale Chart',
+                type: 'pie',
+                radius: [50, 180],
+                center: ['50%', '38%'],
+                roseType: 'area',
                 itemStyle: {
-                        normal: {
-                            color:function(){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
-                        },
-                    },
+                  borderRadius: 8,
+                  normal: {
+                    labelLine: {
+                      length: 10
+                    }
+                  }
+                },
+                data: data
               }
             ]
           })
@@ -157,10 +171,12 @@ export default {
         const names = []
         const values = []
         const prices = []
+        const data = []
         res.data.forEach(item => {
           names.push(item.productName || '')
           values.push(item.num)
           prices.push(item.price)
+          data.push({ value: item.num || 0, name: item.productName || '' })
         })
         this.$nextTick(() => {
           var myChart1 = echarts.init(this.$refs.echart5)
@@ -185,36 +201,47 @@ export default {
                 type: 'bar',
                 data: values,
                 itemStyle: {
-                        normal: {
-                            color:function(){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
-                        },
-                    },
+                  normal: {
+                    color: function () {
+                      return '#' + Math.floor(Math.random() * (256 * 256 * 256 - 1)).toString(16)
+                    }
+                  }
+                }
               }
             ]
           })
           myChart2.setOption({
-            xAxis: {
-              type: 'category',
-              data: names
+            legend: {
+              top: 'bottom'
+            },
+            toolbox: {
+              show: true,
+              feature: {
+                saveAsImage: { show: true }
+              }
             },
             tooltip: {
               formatter: function (arg, ind) {
-                return `销量: ${arg.data}
+                return `销量: ${arg.data.value}
                 金额: ${prices[arg.dataIndex]}`
               }
             },
-            yAxis: {
-              type: 'value'
-            },
             series: [
               {
-                data: values,
-                type: 'line',
+                name: 'Nightingale Chart',
+                type: 'pie',
+                radius: [50, 180],
+                center: ['50%', '38%'],
+                roseType: 'area',
                 itemStyle: {
-                        normal: {
-                            color:function(){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
-                        },
-                    },
+                  borderRadius: 8,
+                  normal: {
+                    labelLine: {
+                      length: 10
+                    }
+                  }
+                },
+                data: data
               }
             ]
           })
