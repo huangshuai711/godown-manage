@@ -180,3 +180,29 @@ export function getMonthList(parameter = {}) {
     data: parameter
   })
 }
+
+// 导入供应尚
+export function importSupplier(parameter = {}) {
+  return request({
+    url: `/api/suppliers/import`,
+    method: 'post',
+    data: parameter
+  })
+}
+
+// 导入商品
+export function importProduct(parameter = {}) {
+  return request({
+    url: `/api/sysProductInfos/import`,
+    method: 'post',
+    data: parameter
+  })
+}
+// 导入客户
+export function importClients(parameter = {}) {
+  return request({
+    url: `/api/clients/import`,
+    method: 'post',
+    data: parameter
+  })
+}

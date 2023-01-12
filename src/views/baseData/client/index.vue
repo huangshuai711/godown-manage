@@ -6,7 +6,17 @@
       :btnArr="btnArr"
       @btnClick="operation"
       labelWidth="120px"
-    ></SearchFrom>
+    >
+      <template slot="Import" slot-scope="{ btn }">
+        <el-upload
+          class="upload-demo"
+          :action="upLoadFileUrl"
+          :show-file-list="false"
+          :before-upload="file => beforeUpload(file, btn)"
+          ><el-button size="mini" type="primary">{{ btn.name }}</el-button>
+        </el-upload>
+      </template></SearchFrom
+    >
     <Table
       :tableRow="tableRow"
       :tableData="tableData"
@@ -24,7 +34,7 @@
 import SearchFrom from '@/components/searchFrom'
 import Table from '@/components/table'
 import Pagination from '@/components/pagination'
-import { getClientList, exportClient, changeClientState } from '@/api/baseData'
+import { getClientList, exportClient, changeClientState, importClients } from '@/api/baseData'
 import { downloadFile } from '@/utils'
 import Details from './components/details.vue'
 import Edit from './components/edit.vue'
@@ -79,7 +89,8 @@ export default {
         { key: 'query', name: '查询' },
         { key: 'export', name: '导出' },
         { key: 'reset', name: '重置' },
-        { key: 'add', name: '新增客户' }
+        { key: 'add', name: '新增客户' },
+        { key: 'Import', name: '导入', slot: true }
       ],
       tableRow: [
         { key: 'clientName', label: '客户名称' },
@@ -126,7 +137,25 @@ export default {
         this.export()
       } else if (key == 'add') {
         this.add()
+      } else {
+        this.Import()
       }
+    },
+    beforeUpload(file, btn, list) {
+      const formData = new FormData()
+      formData.append('file', file)
+      importClients(formData)
+        .then(res => {
+          if (res.code == 200) {
+            this.$message.success('导入成功')
+          } else {
+            this.$message.error(res.msg)
+          }
+        })
+        .catch(error => {
+          this.$message.error('格式错误')
+        })
+      return false
     },
     query() {
       this.queryParam = this.$refs.search.getValue()

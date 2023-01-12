@@ -30,14 +30,12 @@
       </template>
     </el-form>
     <div>
-      <el-button
-        size="mini"
-        v-for="btn in btnArr"
-        :key="btn.key"
-        type="primary"
-        @click="btnClick(btn)"
-        >{{ btn.name }}</el-button
-      >
+      <div class="btn-box" v-for="btn in btnArr" :key="btn.key">
+        <slot v-if="btn.slot" :name="btn.key" :btn="btn"></slot>
+        <el-button v-else size="mini" type="primary" @click="btnClick(btn)">{{
+          btn.name
+        }}</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -103,5 +101,9 @@ export default {
       width: 100%;
     }
   }
+}
+.btn-box {
+  display: inline-block;
+  margin-right: 10px;
 }
 </style>
