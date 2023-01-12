@@ -21,7 +21,7 @@
       :selection="true"
       class="flex-fill"
     ></Table>
-    <Pagination ref="page" :total="total" class="flex-bot"></Pagination>
+    <Pagination ref="page" :total="total" class="flex-bot" @refresh="getData"></Pagination>
     <span slot="footer" class="dialog-footer">
       <el-button type="primary" @click="confirm">确 认</el-button>
       <el-button @click="close">取 消</el-button>

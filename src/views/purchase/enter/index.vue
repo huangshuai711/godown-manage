@@ -23,7 +23,7 @@
       <el-button type="primary" size="mini" @click="enter">确 认</el-button>
       <el-button type="primary" size="mini" @click="cancel">取 消</el-button>
     </div>
-    <Pagination ref="page" :total="total" class="flex-bot"></Pagination>
+    <Pagination ref="page" :total="total" class="flex-bot" @refresh="getData"></Pagination>
   </div>
 </template>
 

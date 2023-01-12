@@ -38,7 +38,7 @@
         </el-select>
       </template>
     </Table>
-    <Pagination ref="page" :total="total" class="flex-bot"></Pagination>
+    <Pagination ref="page" :total="total" class="flex-bot" @refresh="getData"></Pagination>
   </div>
 </template>
 
