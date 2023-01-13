@@ -21,13 +21,13 @@ module.exports = defineConfig({
     /* 使用代理 */
     proxy: {
       // string | Object
-      '/api/': {
+      [process.env.VUE_APP_BASE_API]: {
         /* 目标代理服务器地址 */
-        target: 'https://dianc.autoeco.com.cn/mallApi',
+        target: [process.env.VUE_APP_BASE_URL],
         /* 允许跨域 */
         changeOrigin: true,
         pathRewrite: {
-          '^/api': 'https://dianc.autoeco.com.cn/mallApi' //规定请求地址以什么作为开头
+          ['^' + process.env.VUE_APP_BASE_API]: '' //规定请求地址以什么作为开头
         }
       }
     }
