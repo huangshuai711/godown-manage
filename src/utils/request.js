@@ -5,7 +5,7 @@ import { ACCESS_TOKEN } from '@/store/mutation-types'
 
 const request = axios.create({
   // API 请求的默认前缀
-  baseURL: process.env.VUE_APP_BASE_URL,
+  baseURL: process.env.VUE_APP_BASE_URL + process.env.VUE_APP_BASE_API,
   timeout: 60000 // 请求超时时间
 })
 const errorHandler = error => {
