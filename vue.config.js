@@ -33,5 +33,7 @@ module.exports = defineConfig({
     }
   },
 
-  publicPath: process.env.NODE_ENV === 'production' ? '/wareAdmin' : '/'
+  publicPath: process.env.NODE_ENV === 'production' ? '/wareAdmin' : '/',
+  lintOnSave: false,
+  publicPath: './'
 })
