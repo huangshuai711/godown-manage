@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 import axios from 'axios'
 
-axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
+axios.defaults.baseURL = process.env.VUE_APP_BASE_URL + process.env.VUE_APP_BASE_API
 // 登录
 export function login(parameter) {
   return axios({
