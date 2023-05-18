@@ -17,7 +17,7 @@ export default {
     return {
       formArr: [
         { type: 'upAvatar', label: '用户头像', prop: 'avatar', upType: 'img' },
-        { type: 'input', label: '用户名', prop: 'username', req: true },
+        { type: 'input', label: '用户名', prop: 'userName', req: true },
         { type: 'input', label: '联系电话', prop: 'telephone', req: true, check: 'phone' },
         { type: 'input', label: '邮箱', prop: 'email', req: true, check: 'email' },
         { type: 'address', label: '地址', prop: 'address', wrap: true, req: true },

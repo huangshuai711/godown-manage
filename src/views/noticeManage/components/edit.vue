@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="编辑信息"
+    :title="pupType + '公共栏'"
     :visible.sync="childShow"
     :close-on-click-modal="false"
     width="600px"
@@ -15,7 +15,7 @@
 </template>
 <script>
 import FormLists from '@/components/formLists'
-import { editUserInfo } from '@/api/system'
+import { addNotice, editNotice } from '@/api/noticeManage'
 export default {
   components: { FormLists },
   model: {
@@ -32,11 +32,8 @@ export default {
     return {
       childShow: this.fatherShow,
       formArr: [
-        { type: 'upAvatar', label: '用户头像', prop: 'avatar', upType: 'img' },
-        { type: 'input', label: '用户名', prop: 'userName', req: true },
-        { type: 'input', label: '联系电话', prop: 'telephone', req: true, check: 'phone' },
-        { type: 'input', label: '邮箱', prop: 'email', req: true, check: 'email' },
-        { type: 'address', label: '地址', prop: 'address', req: true }
+        { type: 'input', label: '标题', prop: 'noticeTitle', req: true },
+        { type: 'textarea', label: '内容', prop: 'noticeContent', req: true }
       ],
       data: null
     }
@@ -46,6 +43,7 @@ export default {
       if (!val) {
         this.$refs.formlists.resetForm()
       } else {
+        // 数据处理
         this.$nextTick(() => {
           this.$refs.formlists.echoData()
         })
@@ -53,29 +51,32 @@ export default {
       this.childShow = val
     }
   },
-  computed: {},
+  computed: {
+    pupType() {
+      return this.data ? '编辑' : '新增'
+    }
+  },
   methods: {
     close() {
       this.$emit('shoChange', false)
     },
     async confirm() {
-      console.log('1233')
-      // try {
-      const valid = await this.$refs.formlists.checkFrom()
-      console.log('1233', valid)
-      if (valid) {
-        const params = this.$refs.formlists.getData()
-        params.id = this.data.id
-        const res = await editUserInfo(params)
-        if (res.code == 200) {
-          this.$message.success('编辑成功')
-          this.close()
-          this.$emit('refresh')
-        } else {
-          this.$message.error(res.msg)
+      try {
+        const inter = this.data ? editNotice : addNotice
+        const valid = await this.$refs.formlists.checkFrom()
+        if (valid) {
+          const params = this.$refs.formlists.getData()
+          this.data?.id && (params.id = this.data.id)
+          const res = await inter(params)
+          if (res.code == 200) {
+            this.$message.success(this.pupType + '成功')
+            this.close()
+            this.$emit('refresh')
+          } else {
+            this.$message.error(res.msg)
+          }
         }
-      }
-      // } catch (error) {}
+      } catch (error) {}
     }
   }
 }

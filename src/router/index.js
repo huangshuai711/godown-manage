@@ -4,6 +4,7 @@ import home from '../views/home/'
 import store from '@/store'
 import storage from 'store'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { menuList } from '@/config/menu'
 import { getUserInfoByToken, getUserMenuTree } from '@/api/user'
 
 Vue.use(VueRouter)
@@ -62,8 +63,8 @@ router.beforeEach(async (to, from, next) => {
       store.commit('SET_USERINFO', userInfo)
       // 添加路由
       let newRoutes = router.options.routes
-      let menuLists = await getUserMenuTree(userInfo.id).then(res => res.data)
-      const menuList = menuFormat(menuLists || [], 0)
+      // let menuLists = await getUserMenuTree(userInfo?.id).then(res => res.data)
+      // const menuList = menuFormat(menuLists || [], 0)
       store.commit('SET_MENUTREE', menuList)
       console.log('menuList', menuList)
       menuList?.forEach(menu => {

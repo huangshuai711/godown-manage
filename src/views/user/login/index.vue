@@ -10,17 +10,17 @@
         :hide-required-asterisk="true"
         style="width: 100%"
       >
-        <el-form-item label="账号" prop="username">
+        <el-form-item label="账号" prop="userName">
           <el-autocomplete
             style="width: 100%"
             popper-class="my-autocomplete"
-            v-model="ruleForm.username"
+            v-model="ruleForm.userName"
             :fetch-suggestions="querySearch"
             placeholder="请输入用户名"
             @select="handleSelect"
           >
             <template slot-scope="{ item }">
-              <div class="name">{{ item.username }}</div>
+              <div class="name">{{ item.userName }}</div>
             </template>
           </el-autocomplete>
         </el-form-item>
@@ -52,12 +52,12 @@ export default {
       options: [],
       value: [],
       ruleForm: {
-        username: '',
+        userName: '',
         password: '',
         memory: false
       },
       rules: {
-        username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+        userName: [{ required: true, message: '请输入账号', trigger: 'blur' }],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       },
       restaurants: [],
@@ -83,7 +83,7 @@ export default {
     },
     createFilter(queryString) {
       return restaurant => {
-        return restaurant.username.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+        return restaurant.userName.toLowerCase().indexOf(queryString.toLowerCase()) === 0
       }
     },
     submitForm(formName) {
@@ -95,10 +95,10 @@ export default {
               const accountArr = this.$store.getters.getAccountArr
               let index = -1
               accountArr.find((item, ind) => {
-                if (item.username == this.ruleForm.username) {
+                if (item.userName == this.ruleForm.userName) {
                   index = ind
                 }
-                return item.username == this.ruleForm.username
+                return item.userName == this.ruleForm.userName
               })
               if (index != -1) {
                 accountArr.splice(index, 1)
@@ -106,13 +106,13 @@ export default {
               if (this.ruleForm.memory) {
                 accountArr.unshift({ ...this.ruleForm, memory: this.ruleForm.memory })
               } else {
-                accountArr.unshift({ username: this.ruleForm.username })
+                accountArr.unshift({ userName: this.ruleForm.userName })
               }
               this.$store.commit('SET_ACCOUNTARR', accountArr)
+              window.location.reload()
             } else {
               this.$message.error(res.data.msg)
             }
-            window.location.reload()
           })
         } else {
           return false

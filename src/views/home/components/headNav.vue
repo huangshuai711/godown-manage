@@ -2,7 +2,7 @@
   <div class="headNav">
     <div class="pro-name">金管家仓库管理系统</div>
     <div class="info">
-      <div class="name">欢迎您{{ userInfo?.username }}</div>
+      <div class="name">欢迎您{{ userInfo?.userName }}</div>
       <el-dropdown trigger="click" @command="handleCommand">
         <div class="avatar imges"><img :src="userInfo?.avatar" alt="" /></div>
         <el-dropdown-menu slot="dropdown">
@@ -73,7 +73,7 @@ export default {
       this.editPassShow = true
     },
     loginLog() {
-      this.$router.push({ name: 'systemLog', params: { username: this.userInfo.username } })
+      this.$router.push({ name: 'systemLog', params: { userName: this.userInfo.userName } })
     },
     signOut() {
       this.$confirm('确认推出登录？', '提示', {

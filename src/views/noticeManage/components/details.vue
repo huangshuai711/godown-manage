@@ -1,15 +1,12 @@
 <template>
   <el-dialog
-    :title="title"
+    title="公告详情"
     :visible.sync="childShow"
     :close-on-click-modal="false"
     width="600px"
     :before-close="close"
     center
     ><Exhibition ref="exhibition" :formArr="formArr" :data="data"></Exhibition>
-    <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="$emit('edit')">编 辑</el-button>
-    </span>
   </el-dialog>
 </template>
 <script>
@@ -30,14 +27,10 @@ export default {
     return {
       childShow: this.fatherShow,
       formArr: [
-        { type: 'img', label: '用户头像', prop: 'avatar' },
-        { type: 'text', label: '用户名', prop: 'userName' },
-        { type: 'text', label: '联系电话', prop: 'telephone' },
-        { type: 'text', label: '邮箱', prop: 'email' },
-        { type: 'text', label: '地址', prop: 'address' }
+        { type: 'text', label: '标题', prop: 'noticeTitle' },
+        { type: 'text', label: '内容', prop: 'noticeInfo' }
       ],
-      data: null,
-      title: '用户详情'
+      data: null
     }
   },
   watch: {
